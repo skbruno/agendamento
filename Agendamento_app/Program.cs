@@ -1,7 +1,22 @@
+using Agendamento_app.Context;
+using Agendamento_app.Repository;
+using Agendamento_app.Repository.Interface;
+using Agendamento_app.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<AppointmentService>();
+builder.Services.AddScoped<ServiceService>();
+
+
+string? mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AppDbContext>(Options => Options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
+
 
 var app = builder.Build();
 
