@@ -27,13 +27,23 @@ namespace Agendamento_app.Services
 
         public async Task<bool> CreateAccount(string nome, string email, string senha)
         {
-            var dados = new { Nome = nome, Email = email, Password = senha };
-            var response = await _httpClient.PostAsJsonAsync("https://localhost:7100/api/auth/register", dados);
+            try
+            {
+                var dados = new { Nome = nome, Email = email, Password = senha };
+                var response = await _httpClient.PostAsJsonAsync("https://localhost:7100/api/auth/register", dados);
 
-            if (response.IsSuccessStatusCode)
-                return response.IsSuccessStatusCode;
+                if (response.IsSuccessStatusCode)
+                    return true;
 
-            return false;
+                //criar um logger futuramente
+                var errorContent = await response.Content.ReadAsStringAsync();
+                return false;
+
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

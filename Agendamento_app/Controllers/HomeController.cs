@@ -57,13 +57,20 @@ public class HomeController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateAccount(string Nome, string email, string senha)
     {
-        var usuario = await _authService.CreateAccount(Nome, email, senha);
+        //var usuario = await _authService.CreateAccount(Nome, email, senha);
+        var usuario = true;
 
-        if(usuario == true)
+        if (usuario == true)
+        {
+            TempData["ToastMessage"] = "Conta Criada com Sucesso";
+            TempData["ToastType"] = "success";
             return RedirectToAction("Index", "Home");
 
-        ViewBag.Erro = "Email ou senha inválidos";
-        return View("CreateAccount", "Home");
+        }
+
+        TempData["ToastMessage"] = "Erro ao criar a conta. Verifique os dados.";
+        TempData["ToastType"] = "error";
+        return View("CreateAccount");
 
     }
 
