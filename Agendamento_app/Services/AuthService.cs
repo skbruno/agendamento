@@ -11,19 +11,29 @@ namespace Agendamento_app.Services
             _httpClient.BaseAddress = new Uri("https://localhost:7100");
         }
 
-        public async Task<UserRespondeDTO?> Login(string email, string senha)
+        public async Task<UserRespondeTokenDTO?> Login(string email, string senha)
         {
             var dados = new { Email = email, password = senha };
-            var response = await _httpClient.PostAsJsonAsync("https://localhost:7100/api/Usuario/api/auth/login", dados);
-
+            var response = await _httpClient.PostAsJsonAsync("https://localhost:7100/api/auth/login", dados);
 
             if(response.IsSuccessStatusCode)
             {
-                var UserData = await response.Content.ReadFromJsonAsync<UserRespondeDTO>();
+                var UserData = await response.Content.ReadFromJsonAsync<UserRespondeTokenDTO>();
                 return UserData;
             }
 
             return null;
+        }
+
+        public async Task<bool> CreateAccount(string nome, string email, string senha)
+        {
+            var dados = new { Nome = nome, Email = email, Password = senha };
+            var response = await _httpClient.PostAsJsonAsync("https://localhost:7100/api/auth/register", dados);
+
+            if (response.IsSuccessStatusCode)
+                return response.IsSuccessStatusCode;
+
+            return false;
         }
     }
 }

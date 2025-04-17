@@ -19,62 +19,28 @@
             <div id="erro" class="alert alert-danger d-none"></div>
             <div id="sucesso" class="alert alert-success d-none"></div>
 
-            <form id="formCriarConta">
+            <form asp-action="CreateAccount" method="post">
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="nome" placeholder="Digite seu nome" required />
+                    <input type="text" class="form-control" id="nome" name = "nome" placeholder="Digite seu nome" required />
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>
-                    <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail" required />
+                    <input type="email" class="form-control" id="email" name = "email" placeholder="Digite seu e-mail" required />
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="password" placeholder="Digite sua senha" required />
+                    <input type="password" class="form-control" id="password" name = "senha" placeholder="Digite sua senha" required />
                 </div>
                 <div class="d-grid">
                     <button type="submit" class="btn btn-success">Criar Conta</button>
                 </div>
             </form>
+
             <div class="text-center mt-3">
                 <a asp-controller="Home" asp-action="Index">Já tem uma conta? Faça login</a>
             </div>
         </div>
     </div>
-
-    <script>
-        document.getElementById("formCriarConta").addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            const nome = document.getElementById("nome").value;
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-
-            axios.post("https://localhost:7100/api/Usuario/api/auth/register", {
-                nome: nome,
-                email: email,
-                password: password
-            })
-            .then(response => {
-                const sucessoDiv = document.getElementById("sucesso");
-                sucessoDiv.classList.remove("d-none");
-                sucessoDiv.textContent = "Conta criada com sucesso!";
-
-                document.getElementById("erro").classList.add("d-none");
-
-                // Redirecionar após alguns segundos, se quiser:
-                setTimeout(() => {
-                    window.location.href = "/Home/Login";
-                }, 2000);
-            })
-            .catch(error => {
-                const erroDiv = document.getElementById("erro");
-                erroDiv.classList.remove("d-none");
-                erroDiv.textContent = "Erro ao criar conta. Verifique os dados.";
-                document.getElementById("sucesso").classList.add("d-none");
-            });
-        });
-    </script>
-
 </body>
 </html>

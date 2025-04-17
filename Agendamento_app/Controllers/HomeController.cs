@@ -51,7 +51,20 @@ public class HomeController : Controller
         }
 
         ViewBag.Erro = "Email ou senha inválidos";
-        return View("");
+        return View("Index", "Home");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateAccount(string Nome, string email, string senha)
+    {
+        var usuario = await _authService.CreateAccount(Nome, email, senha);
+
+        if(usuario == true)
+            return RedirectToAction("Index", "Home");
+
+        ViewBag.Erro = "Email ou senha inválidos";
+        return View("CreateAccount", "Home");
+
     }
 
 }
