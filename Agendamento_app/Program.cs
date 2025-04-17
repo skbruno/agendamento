@@ -17,19 +17,15 @@ builder.Services.AddSingleton<AuthService>();
 string? mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(Options => Options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
 
-builder.Services.AddCors(options =>
+//Guardando em cache para poder acessar os dados do usuario como o token
+builder.Services.AddDistributedMemoryCache(); 
+builder.Services.AddSession(options =>
 {
-    options.AddPolicy("AllowLocalhostFrontend", policy =>
-    {
-        policy.WithOrigins("https://localhost:7181") // Porta do frontend
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
+    options.IdleTimeout = TimeSpan.FromMinutes(15);
 });
 
 var app = builder.Build();
 
-//app.UseSession();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -51,5 +47,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseSession();
 
 app.Run();

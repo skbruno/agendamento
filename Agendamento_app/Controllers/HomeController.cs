@@ -47,11 +47,11 @@ public class HomeController : Controller
             HttpContext.Session.SetString("Nome", usuario.Nome);
             HttpContext.Session.SetString("Email", usuario.Email);
 
-            return RedirectToAction("Dashboard");
+            return RedirectToAction("Index", "Dashboard");
         }
 
         ViewBag.Erro = "Email ou senha inválidos";
-        return View("Index");
+        return View("");
     }
 
 }
