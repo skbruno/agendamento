@@ -35,6 +35,22 @@ public class HomeController : Controller
     {
         return View();
     }
+    public IActionResult Appointments()
+    {
+        return View();
+    }
+    public IActionResult Users()
+    {
+        return View();
+    }
+    public IActionResult Notifications()
+    {
+        return View();
+    }
+    public IActionResult Settings()
+    {
+        return View();
+    }
 
     [HttpPost]
     public async Task<IActionResult> Login(string email, string senha)
@@ -72,6 +88,13 @@ public class HomeController : Controller
         TempData["ToastType"] = "error";
         return View("CreateAccount");
 
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Logout()
+    {
+        HttpContext.Session.Remove("Token");
+        return RedirectToAction("Index", "Home");
     }
 
 }

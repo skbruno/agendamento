@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Criar Conta";
-    Layout = "_Layout";
+    Layout = "";
 }
 
 
@@ -14,6 +14,89 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background: linear-gradient(135deg, #3a8dff, #7cb3ff);
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            background-size: cover;
+            background-color: #3a8dff; 
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 400px;
+            color: white;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            text-align: center;
+        }
+
+            .card h3 {
+                margin-bottom: 30px;
+                font-weight: 300;
+            }
+
+        .form-control {
+            border: 1px solid #fff;
+            border-radius: 10px;
+            color: white;
+        }
+
+            .form-control::placeholder {
+                color: #e0e0e0;
+            }
+
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+            .btn-success:hover {
+                background-color: #218838;
+            }
+
+        a {
+            color: #ffffffcc;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        label {
+            color: #e0e0e0;
+            float: left;
+            margin-bottom: 5px;
+        }
+
+        .form-check-label {
+            color: #ccc;
+        }
+
+        .form-check {
+            text-align: left;
+        }
+
+    </style>
 </head>
 <body class="bg-light">
     <div class="container d-flex justify-content-center align-items-center vh-100">

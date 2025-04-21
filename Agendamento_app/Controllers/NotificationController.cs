@@ -2,10 +2,10 @@
 
 namespace Agendamento_app.Controllers
 {
-    public class AppointmentController : Controller
+    public class NotificationController : Controller
     {
-        public IActionResult Agendamentos()
-        { 
+        public IActionResult Notificacoes()
+        {
             return View();
         }
     }

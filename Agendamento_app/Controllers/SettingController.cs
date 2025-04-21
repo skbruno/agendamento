@@ -2,10 +2,10 @@
 
 namespace Agendamento_app.Controllers
 {
-    public class AppointmentController : Controller
+    public class SettingController : Controller
     {
-        public IActionResult Agendamentos()
-        { 
+        public IActionResult Configuracoes()
+        {
             return View();
         }
     }

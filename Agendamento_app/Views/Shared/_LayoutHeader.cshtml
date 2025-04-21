@@ -48,7 +48,8 @@
             }
 
                 .sidebar a:hover,
-                .sidebar a.active {
+                .sidebar a.active,
+                .logout-form:hover {
                     background-color: #f0f0f0;
                 }
 
@@ -93,6 +94,26 @@
         .sidebar.collapsed .toggle-sidebar-btn {
             margin-left: auto;
         }
+        .logout-form {
+            display: inline;
+            padding: 0.75rem 0.75rem;
+        }
+
+        .logout-button {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            padding-right: 1rem;
+            font: inherit;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logout-form:hover {
+            background-color: #f0f0f0;
+        }
     </style>
 </head>
 <body>
@@ -111,18 +132,23 @@
         <a href="/Dashboard" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" ? "active" : "")">
             <i class="bi bi-house"></i> <span class="link-text">Dashboard</span>
         </a>
-        <a href="/Agendamentos" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Agendamentos" ? "active" : "")">
+        <a asp-controller="Appointment" asp-action="Agendamentos" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Agendamentos" ? "active" : "")">
             <i class="bi bi-calendar-check"></i> <span class="link-text">Agendamentos</span>
         </a>
-        <a href="/Usuarios" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Usuarios" ? "active" : "")">
+        <a asp-controller="User" asp-action="Usuarios" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Usuarios" ? "active" : "")">
             <i class="bi bi-people"></i> <span class="link-text">Usuários</span>
         </a>
-        <a href="/Notificacoes" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Notificacoes" ? "active" : "")">
+        <a asp-controller="Notification" asp-action="Notificacoes" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Notificacoes" ? "active" : "")">
             <i class="bi bi-bell"></i> <span class="link-text">Notificações</span>
         </a>
-        <a href="/Configuracoes" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Configuracoes" ? "active" : "")">
+        <a asp-controller="Setting" asp-action="Configuracoes" class="@(ViewContext.RouteData.Values["controller"]?.ToString() == "Configuracoes" ? "active" : "")">
             <i class="bi bi-gear"></i> <span class="link-text">Configurações</span>
         </a>
+        <form asp-controller="Home" asp-action="Logout" method="post" class="logout-form">
+            <button type="submit" class="logout-button">
+                <i class="bi bi-box-arrow-right"></i> <span class="link-text">Logout</span>
+            </button>
+        </form>
     </nav>
 
     <div class="main-content">
